@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">NaukNauk</string>
+    <string name="search_text_view_string">Search</string>
+    <string name="favorites_text_view_string">Favorites</string>
+</resources>
