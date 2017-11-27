@@ -2,4 +2,7 @@
     <string name="app_name">NaukNauk</string>
     <string name="search_text_view_string">Search</string>
     <string name="favorites_text_view_string">Favorites</string>
+    <string name="search_by_name_text_view_string">Search by Name</string>
+    <string name="search_by_department_text_view_string">Search by Department</string>
+    <string name="search_by_name_text_view_hint">Enter Name</string>
 </resources>

@@ -4,6 +4,9 @@
     <color name="colorPrimaryDark">#59484F</color>
     <color name="colorAccent">#DBE6AF</color>
     <color name="searchColor">#45535c</color>
+    <color name="searchByNameColor">#694364</color>
+    <color name="searchByDepartmentColor">#6E615A</color>
+    <color name="searchByDepartmentListColor">#E8E4E1</color>
     <color name="favoritesColor">#CC5543</color>
     <color name="textColor">#DBE6AF</color>
 </resources>
