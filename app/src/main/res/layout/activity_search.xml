@@ -33,7 +33,7 @@
         android:hint="@string/search_by_name_text_view_hint"
         android:gravity="center"
         android:textSize="25sp"
-        android:textColor="@color/textColorWhite"
+        android:textColor="@color/textColorBlack"
         android:layout_rowWeight="1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
