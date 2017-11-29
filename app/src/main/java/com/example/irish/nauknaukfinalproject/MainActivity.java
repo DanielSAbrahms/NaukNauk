@@ -25,36 +25,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, SearchActivity.class);
-                fancyStart(intent, 0);
+                startActivity(intent);
             }
         });
     }
 
 
-
-
-    private void fancyStart(Intent intent, int selectedItem) {
-        final TextView selectedView;
-        switch (selectedItem) {
-            case 0:
-                selectedView = (TextView) findViewById(R.id.SearchTextView);
-                timeLeft = 1;
-                while(timeLeft < 500) {
-                    final Handler handler = new Handler();
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            /*
-                            GridLayout.Spec colSpec = new GridLayout.Spec(0, 1, timeLeft)
-                            GridLayout.LayoutParams params = new GridLayout.LayoutParams(colSpec, rowSpec);
-                            selectedView.
-                            */
-                        }
-                    }, 15);
-                    timeLeft++;
-                }
-                break;
-        }
-        startActivity(intent);
-    }
 }

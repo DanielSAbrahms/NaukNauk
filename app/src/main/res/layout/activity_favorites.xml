@@ -4,44 +4,44 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.irish.nauknaukfinalproject.MainActivity">
+    tools:context="com.example.irish.nauknaukfinalproject.FavoritesActivity">
+
 
     <TextView
-        android:id="@+id/SearchTextView"
-        android:layout_row="0"
+        android:id="@+id/SearchByDepartmentTextView"
+        android:layout_row="2"
+        android:layout_column="0"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:text="@string/favorites_text_view_string"
+        android:gravity="center"
+        android:textSize="25sp"
+        android:textColor="@color/textColor"
+        android:background="@color/favoritesColor"
+        android:layout_rowWeight="1"
+        android:drawableEnd="@drawable/favorites_icon"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ListView
+        android:id="@+id/SearchBar"
+        android:layout_row="3"
         android:layout_column="0"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:text="@string/search_text_view_string"
         android:gravity="center"
-        android:textSize="60sp"
-        android:textColor="@color/textColorWhite"
-        android:background="@color/searchColor"
-        android:layout_rowWeight="1"
-        android:drawableEnd="@drawable/search_icon"
-        android:padding="50dp"
+        android:textSize="30sp"
+        android:textColor="@color/textColor"
+        android:background="@color/searchByDepartmentListColor"
+        android:layout_rowWeight="5"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        />
 
-    <TextView
-        android:id="@+id/FavoritesTextView"
-        android:layout_row="1"
-        android:layout_column="0"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:text="@string/favorites_text_view_string"
-        android:textSize="60sp"
-        android:textColor="@color/textColorWhite"
-        android:background="@color/favoritesColor"
-        android:layout_rowWeight="1"
-        android:gravity="center"
-        android:drawableEnd="@drawable/favorites_icon"
-        android:padding="25dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
 </GridLayout>
