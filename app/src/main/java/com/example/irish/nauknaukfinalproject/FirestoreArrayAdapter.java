@@ -42,7 +42,7 @@ public class FirestoreArrayAdapter extends ArrayAdapter<Professor>{
     private CollectionReference professorCollectionRef = null;
     private CollectionReference studentCollectionRef = null;
 
-    //final int[] IMAGES = {R.drawable.greenlight, R.drawable.redlight};
+    final int[] IMAGES = {R.drawable.greenlight, R.drawable.redlight};
     private ArrayAdapter<Professor> professorAdapter;
     private Context context;
     private String sortMode;
@@ -73,7 +73,7 @@ public class FirestoreArrayAdapter extends ArrayAdapter<Professor>{
         txt.setTextSize(25);
 
         ImageView img = (ImageView) convertView.findViewById(android.R.id.icon);
-        //img.setImageResource(professor.isAvailable ? IMAGES[0] : IMAGES[1]);
+        img.setImageResource(professor.isAvailable ? IMAGES[0] : IMAGES[1]);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(60,60);
         params.gravity = Gravity.CENTER;
         img.setLayoutParams(params);
