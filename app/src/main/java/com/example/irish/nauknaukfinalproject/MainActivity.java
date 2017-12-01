@@ -50,7 +50,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         TextView test = findViewById(R.id.SearchTextView);
         test.setOnClickListener(new View.OnClickListener() {
             //comment to push
@@ -60,6 +59,11 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        // BLOCK OF FIREBASE REFERENCING
+        this.db = FirebaseFirestore.getInstance();
+        this.rootReference = db.collection(ROOT_KEY);
+        this.professorCollectionRef=db.collection(PROFESSORS_KEY);
+        this.studentCollectionRef = db.collection(STUDENTS_KEY);
     }
 
     @Override
