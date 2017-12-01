@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
         TextView test = findViewById(R.id.SearchTextView);
         test.setOnClickListener(new View.OnClickListener() {
+            //comment to push
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, SearchActivity.class);
