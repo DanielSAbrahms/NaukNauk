@@ -11,11 +11,40 @@ import android.view.ViewGroup;
 import android.widget.GridLayout;
 import android.widget.TextView;
 
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import java.io.Serializable;
 
 import static android.content.res.Configuration.ORIENTATION_LANDSCAPE;
 
 public class MainActivity extends AppCompatActivity {
+    private static String TAG = "MAINACTIVITY";
+    // Keys for document field-level queries
+    public static String EMAIL_KEY = "email";
+    public static String PASSWORD_KEY = "password";
+    public static String FIRSTNAME_KEY = "firstName";
+    public static String LASTNAME_KEY = "lastName";
+    public static String DEPARTMENT_KEY = "department";
+    public static String AVAILABLE_KEY = "isAvailable";
+    public static String FAVORITES_KEY = "favorites";
+    // Keys for collection access
+    public static String ROOT_KEY = "NaukNauk";
+    public static String USERS_KEY = "NaukNauk/Users";
+    public static String STUDENTS_KEY = "NaukNauk/Users/Students";
+    public static String PROFESSORS_KEY = "NaukNauk/Users/Professors";
+    // String array of
+    private final String[] DEPARTMENTS = {"All Departments", "Accounting", "Business Administration", "Biology", "Economics", "Finance",
+            "Marketing", "Chemistry", "Communication", "Computer Science", "Criminal Justice", "Education", "Engineering", "English",
+            "History", "Human Physiology", "Journalism", "Mathematics", "Music", "Nursing", "Philosophy", "Physics", "Political Science",
+            "Psychology", "Public Relations", "Sociology", "Sport Management", "Sport and Physical Education", "Theatre Arts"};
+    // FireStore global access variables (Collection Levels)
+    private FirebaseFirestore db = null;
+    private CollectionReference rootReference = null;
+    private CollectionReference professorCollectionRef = null;
+    private CollectionReference studentCollectionRef = null;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

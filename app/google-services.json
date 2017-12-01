@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "547946282434",
+    "firebase_url": "https://naukn-af315.firebaseio.com",
+    "project_id": "naukn-af315",
+    "storage_bucket": "naukn-af315.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:547946282434:android:540dc0f240577f8e",
+        "android_client_info": {
+          "package_name": "com.example.irish.nauknaukfinalproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "547946282434-dredddsghii5rm5u1lfojt71monmfijh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCfkoSOo5L8eer1nMmX6RX9hWcZYaQuXM4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
