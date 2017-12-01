@@ -6,6 +6,7 @@ import android.content.res.Configuration;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridLayout;
@@ -64,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
         this.rootReference = db.collection(ROOT_KEY);
         this.professorCollectionRef=db.collection(PROFESSORS_KEY);
         this.studentCollectionRef = db.collection(STUDENTS_KEY);
+        Log.d(TAG, new Professor("Jason", "Conci", "conci@gonzaga.edu", "password", "Computer Science").toString());
     }
 
     @Override
