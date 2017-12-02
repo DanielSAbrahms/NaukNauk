@@ -48,8 +48,8 @@ public class ProfessorActivity extends AppCompatActivity {
             boolean isAvailable = intent.getBooleanExtra(AVAILABLE_KEY, false);
             professor = new Professor(firstName, lastName, email, "dummy", department);
             Log.d(TAG, professor.toString());
-            ImageView img = (ImageView) findViewById(R.id.availableImage);
-            img.setImageResource(professor.isAvailable() ? IMAGES[0] : IMAGES[1]);
+            //ImageView img = (ImageView) findViewById(R.id.availableImage);
+            //img.setImageResource(professor.isAvailable() ? IMAGES[0] : IMAGES[1]);
             TextView nameText = findViewById(R.id.nameText);
             TextView departmentText = findViewById(R.id.departmentText);
             TextView emailText = findViewById(R.id.emailText);

@@ -13,9 +13,11 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -73,6 +75,7 @@ public class SearchActivity extends AppCompatActivity {
         professorList = new ArrayList<>();
         professorAdapter = new FirestoreArrayAdapter(this, professorList);
         professorListView.setAdapter(professorAdapter);
+/*
         EditText searchy = (EditText) findViewById(R.id.NameSearchBar);
         searchy.getBackground().setColorFilter(getResources().getColor(R.color.searchColor), PorterDuff.Mode.SRC_ATOP);
         searchy.addTextChangedListener(new TextWatcher() {
@@ -91,6 +94,28 @@ public class SearchActivity extends AppCompatActivity {
                 getProfessorsGivenName(editable.toString());
             }
         });
+*/
+        final SearchView searchy = findViewById(R.id.NameSearchBar);
+        searchy.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                getProfessorsGivenName(s);
+                return false;
+            }
+        });
+        searchy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                searchy.setIconified(false);
+            }
+        });
+
+
 
         departmentTextView = findViewById(R.id.searchByDepartmentTextView);
         departmentTextView.setOnClickListener(new View.OnClickListener() {
