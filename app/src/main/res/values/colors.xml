@@ -6,7 +6,7 @@
     <color name="searchColor">#007D8A</color>
     <color name="searchByNameColor">#A1D6CA</color>
     <color name="searchByDepartmentColor">#A4C8E1</color>
-    <color name="searchByDepartmentListColor">#E8E4E1</color>
+    <color name="searchByDepartmentListColor">#ffffff</color>
     <color name="favoritesColor">#76232F</color>
     <color name="textColorWhite">#ffffff</color>
     <color name="textColorBlack">#000000</color>

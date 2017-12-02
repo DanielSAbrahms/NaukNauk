@@ -75,26 +75,7 @@ public class SearchActivity extends AppCompatActivity {
         professorList = new ArrayList<>();
         professorAdapter = new FirestoreArrayAdapter(this, professorList);
         professorListView.setAdapter(professorAdapter);
-/*
-        EditText searchy = (EditText) findViewById(R.id.NameSearchBar);
-        searchy.getBackground().setColorFilter(getResources().getColor(R.color.searchColor), PorterDuff.Mode.SRC_ATOP);
-        searchy.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                //if(charSequence.toString().compareTo("")==0)departmentSpinner.setSelection(0);
-            }
 
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                //if(editable.toString().compareTo("")==0) departmentSpinner.setSelection(0);
-                getProfessorsGivenName(editable.toString());
-            }
-        });
-*/
         final SearchView searchy = findViewById(R.id.NameSearchBar);
         searchy.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -104,7 +85,12 @@ public class SearchActivity extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String s) {
-                getProfessorsGivenName(s);
+                departmentTextView = findViewById(R.id.searchByDepartmentTextView);
+                if(s.compareTo("")==0) departmentTextView.setVisibility(View.VISIBLE);
+                else {
+                    departmentTextView.setVisibility(View.GONE);
+                    getProfessorsGivenName(s);
+                }
                 return false;
             }
         });
@@ -138,6 +124,7 @@ public class SearchActivity extends AppCompatActivity {
          * When someone clicks on a Professor's name in a ListView, the Professor's fields are gathered
          * and passed into ProfessorActivity, where the user is shown all their information, and is given
          * the option to email them via implicit intent.
+         * TODO: get the naming convention WAY better for professors ( pull from list,. don't assume last name )
          */
         professorListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

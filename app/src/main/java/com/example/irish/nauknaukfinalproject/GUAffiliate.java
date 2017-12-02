@@ -1,10 +1,12 @@
 package com.example.irish.nauknaukfinalproject;
 
+import java.io.Serializable;
+
 /**
  * Created by Jason on 11/30/2017.
  */
 
-public class GUAffiliate {
+public class GUAffiliate implements Serializable{
     public String firstName;
     public String lastName;
     public String email;
