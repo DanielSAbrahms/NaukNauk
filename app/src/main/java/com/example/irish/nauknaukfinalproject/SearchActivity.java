@@ -127,11 +127,16 @@ public class SearchActivity extends AppCompatActivity {
                         intent.putExtra(DEPARTMENT_KEY, professor.getDepartment());
                         intent.putExtra(EMAIL_KEY, professor.getEmail());
                         intent.putExtra(AVAILABLE_KEY, professor.isAvailable());
-                        startActivity(intent);
+                        startActivityForResult(intent, 0);
                     }
                 });
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     public ArrayList<Professor> getProfessorsGivenName(String name){

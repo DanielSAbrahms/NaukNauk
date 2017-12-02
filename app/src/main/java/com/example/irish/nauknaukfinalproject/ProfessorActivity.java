@@ -5,10 +5,13 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.NavUtils;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EdgeEffect;
@@ -58,16 +61,27 @@ public class ProfessorActivity extends AppCompatActivity {
                 startActivity(Intent.createChooser(emailIntent, "Choose how you'd like to send"));
             }
         });
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater balloon = getMenuInflater();
+        balloon.inflate(R.menu.professor_menu, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        return super.onOptionsItemSelected(item);
+        switch(item.getItemId()){
+            case android.R.id.home:
+                Intent intent = new Intent();
+                setResult(RESULT_OK, intent);
+                ProfessorActivity.this.finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }
