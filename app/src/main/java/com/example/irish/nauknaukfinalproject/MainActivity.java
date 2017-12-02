@@ -33,7 +33,10 @@ import java.util.List;
 import static android.content.res.Configuration.ORIENTATION_LANDSCAPE;
 
 public class MainActivity extends AppCompatActivity {
-    private static String TAG = "MAINACTIVITY";
+    private String currentUser = "jconci@zagmail.gonzaga.edu";
+    private final int REQUEST_CODE_FAVORITES = 1;
+    private final int REQUEST_CODE_SEARCH = 2;
+    private final String TAG = "MAINACTIVITY";
     // Keys for document field-level queries
     public static String EMAIL_KEY = "email";
     public static String PASSWORD_KEY = "password";
@@ -86,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
         this.studentCollectionRef = db.collection(STUDENTS_KEY);
         Log.d(TAG, new Professor("Jason", "Conci", "conci@gonzaga.edu", "password", "Computer Science").toString());
         FirestoreHelper helper = new FirestoreHelper();
+        /*
         helper.addUser(new Professor("Gina", "Sprint", "sprint@gonzaga.edu", "password", "Computer Science"), true);
         helper.addUser(new Professor("Shawn", "Bowers", "bowers@gonzaga.edu", "password", "Computer Science"), true);
         helper.addUser(new Professor("Melody", "Alsaker", "alsaker@gonzaga.edu", "password", "Mathematics"), true);
@@ -95,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
         helper.addUser(new Professor("Rick", "Stoody", "stoody@gonzaga.edu", "password", "Philosophy"), true);
         helper.addUser(new Professor("Brent", "Diebel", "diebel@gonzaga.edu", "password", "Philosophy"), true);
         helper.addUser(new Professor("Bonni", "Dichone", "dichone@gonzaga.edu", "password", "Mathematics"), true);
-
+        */
     }
 
     @Override
@@ -110,6 +114,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // HELPER METHODS //
+
+    public void onFavoritesClicked(View view){
+        Intent intent = new Intent(MainActivity.this, FavoritesActivity.class);
+        intent.putExtra("CURRENT_USER", currentUser);
+        startActivity(intent);
+    }
 
     /**
      * Method to update the ArrayList. Method is not 100% necessary anymore, but it doesn't hurt to have
@@ -246,8 +256,7 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * provides list of professors given a first or last name.
-     * TODO: break this method into two distinct methods: first OR last name
-     * TODO: make the naming convention way less ugly
+     * NOTE: naming convention couldn't be less ugly
      * @param name -> name we're searching for
      * @return -> arrayList of professors matching
      */
@@ -256,14 +265,13 @@ public class MainActivity extends AppCompatActivity {
         char[] nameArray = name.toCharArray();
         if(name.compareTo("")==0) return professorList;
         nameArray[name.length()-1] = ( (char) (((nameArray[name.length()-1] - 'a' + 1)%26) + 'a'));
-        String newString = "";
+        String upperLimitString = "";
         for(char c: nameArray){
-            newString += String.valueOf(c);
+            upperLimitString += String.valueOf(c);
         }
-        Log.d(TAG, newString);
-        final String newStringAccess = newString;
-        final String nameAccess = name;
-        professorCollectionRef.whereGreaterThanOrEqualTo(FIRSTNAME_KEY, name).whereLessThan(FIRSTNAME_KEY, newString)
+        Log.d(TAG, upperLimitString);
+        professorCollectionRef.whereGreaterThanOrEqualTo(LASTNAME_KEY, name)
+                .whereLessThan(LASTNAME_KEY, upperLimitString)
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(QuerySnapshot documentSnapshots, FirebaseFirestoreException e) {
@@ -275,20 +283,6 @@ public class MainActivity extends AppCompatActivity {
                             for (DocumentSnapshot doc : documentSnapshots) {
                                 professorList.add(doc.toObject(Professor.class));
                             }
-                            professorCollectionRef.whereEqualTo(LASTNAME_KEY, nameAccess).whereLessThan(LASTNAME_KEY, newStringAccess)
-                                    .addSnapshotListener(new EventListener<QuerySnapshot>() {
-                                        @Override
-                                        public void onEvent(QuerySnapshot documentSnapshots, FirebaseFirestoreException e) {
-                                            if (e != null) {
-                                                Log.d(TAG, "There was an issue searching by lastname");
-                                                return;
-                                            } else {
-                                                for (DocumentSnapshot doc : documentSnapshots) {
-                                                    professorList.add(doc.toObject(Professor.class));
-                                                }
-                                            }
-                                        }
-                                    });
                             professorAdapter = new FirestoreArrayAdapter(MainActivity.this, professorList);
                             professorsListView.setAdapter(professorAdapter);
                             professorsListView.invalidate();

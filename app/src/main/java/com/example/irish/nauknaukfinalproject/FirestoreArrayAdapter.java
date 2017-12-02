@@ -3,6 +3,7 @@ package com.example.irish.nauknaukfinalproject;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -55,6 +56,7 @@ public class FirestoreArrayAdapter extends ArrayAdapter<Professor>{
         professorCollectionRef = db.collection(PROFESSORS_KEY);
         studentCollectionRef = db.collection(STUDENTS_KEY);
         this.context = context;
+        Log.d(TAG, "List: "+ professorList.toString());
     }
 
 
@@ -66,11 +68,11 @@ public class FirestoreArrayAdapter extends ArrayAdapter<Professor>{
             convertView= LayoutInflater.from(getContext())
                     .inflate(android.R.layout.activity_list_item, parent, false);
         }
-        convertView.setMinimumHeight(70);
+        convertView.setMinimumHeight(80);
 
         TextView txt = (TextView) convertView.findViewById(android.R.id.text1);
         txt.setText(professor.firstName + " " + professor.lastName);
-        txt.setTextSize(25);
+        txt.setTextSize(30);
 
         ImageView img = (ImageView) convertView.findViewById(android.R.id.icon);
         img.setImageResource(professor.isAvailable ? IMAGES[0] : IMAGES[1]);

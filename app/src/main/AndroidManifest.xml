@@ -16,10 +16,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SearchActivity"
-            android:parentActivityName=".MainActivity"/>
-        <activity android:name=".FavoritesActivity"
-            android:parentActivityName=".MainActivity"/>
+        <activity
+            android:name=".SearchActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".FavoritesActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".ProfessorActivity"
+            android:label="@string/title_activity_professor"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

@@ -17,7 +17,9 @@ public class GUAffiliate {
         this.password = password;
     }
 
-    public GUAffiliate() {    }
+    public GUAffiliate() {
+        this.firstName = this.lastName = this.email = this.password = "NULL";
+    }
 
     public String getFirstName() {
         return firstName;

@@ -1,10 +1,12 @@
 package com.example.irish.nauknaukfinalproject;
 
+import java.io.Serializable;
+
 /**
  * Created by Jason on 11/30/2017.
  */
 
-public class Professor extends GUAffiliate {
+public class Professor extends GUAffiliate implements Serializable{
     public String department;
     public boolean isAvailable;
 
@@ -12,6 +14,7 @@ public class Professor extends GUAffiliate {
 
     public Professor() {
         super();
+        this.isAvailable = true;
     }
     public Professor(String firstName, String lastName, String email, String password, String department, boolean isAvailable) {
         super(firstName, lastName, email, password);
