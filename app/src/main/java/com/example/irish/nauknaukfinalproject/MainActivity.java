@@ -26,6 +26,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import org.w3c.dom.Text;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -82,6 +84,14 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        TextView favorites = (TextView) findViewById(R.id.FavoritesTextView);
+        favorites.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, FavoritesActivity.class);
+                startActivity(intent);
+            }
+        });
         // BLOCK OF FIREBASE REFERENCING
         this.db = FirebaseFirestore.getInstance();
         this.rootReference = db.collection(ROOT_KEY);
@@ -114,12 +124,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // HELPER METHODS //
-
-    public void onFavoritesClicked(View view){
-        Intent intent = new Intent(MainActivity.this, FavoritesActivity.class);
-        intent.putExtra("CURRENT_USER", currentUser);
-        startActivity(intent);
-    }
 
     /**
      * Method to update the ArrayList. Method is not 100% necessary anymore, but it doesn't hurt to have

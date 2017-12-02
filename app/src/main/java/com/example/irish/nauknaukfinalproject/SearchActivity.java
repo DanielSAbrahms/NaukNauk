@@ -109,6 +109,11 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
 
+        /**
+         * When someone clicks on a Professor's name in a ListView, the Professor's fields are gathered
+         * and passed into ProfessorActivity, where the user is shown all their information, and is given
+         * the option to email them via implicit intent.
+         */
         professorListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {

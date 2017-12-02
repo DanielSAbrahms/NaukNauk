@@ -1,6 +1,7 @@
 package com.example.irish.nauknaukfinalproject;
 
 import android.content.Intent;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -16,12 +17,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EdgeEffect;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
 public class ProfessorActivity extends AppCompatActivity {
     private final String TAG = "PROFESSOR_ACTIVITY";
+    private final int[] IMAGES = {R.drawable.greencheck, R.drawable.redx};
     public static String EMAIL_KEY = "email";
     public static String PASSWORD_KEY = "password";
     public static String FIRSTNAME_KEY = "firstName";
@@ -45,6 +48,8 @@ public class ProfessorActivity extends AppCompatActivity {
             boolean isAvailable = intent.getBooleanExtra(AVAILABLE_KEY, false);
             professor = new Professor(firstName, lastName, email, "dummy", department);
             Log.d(TAG, professor.toString());
+            ImageView img = (ImageView) findViewById(R.id.availableImage);
+            img.setImageResource(professor.isAvailable() ? IMAGES[0] : IMAGES[1]);
             TextView nameText = findViewById(R.id.nameText);
             TextView departmentText = findViewById(R.id.departmentText);
             TextView emailText = findViewById(R.id.emailText);
