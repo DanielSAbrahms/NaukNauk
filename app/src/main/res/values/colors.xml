@@ -10,8 +10,9 @@
     <color name="favoritesColor">#76232F</color>
     <color name="textColorWhite">#ffffff</color>
     <color name="textColorBlack">#000000</color>
-    <color name="professor1">#0072CE</color>
-    <color name="professor2">#CF4520</color>
-    <color name="professor3">#A2ACAB</color>
-    <color name="professor4">#A4C8E1</color>
+    <color name="professor1">#0072ce</color>
+    <color name="professor2">#01569b</color>
+    <color name="professor3">#01569b</color>
+    <color name="professor4">#01569b</color>
+    <color name="professor5">#01569b</color>
 </resources>

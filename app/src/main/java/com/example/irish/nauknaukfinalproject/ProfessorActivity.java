@@ -37,26 +37,37 @@ public class ProfessorActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_professor);
+        /*
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        if(getIntent()!=null){
-            Intent intent = getIntent();
+        */
+
+        Intent intent = getIntent();
+
+        if(intent != null){
+
+            // TODO: Add receiving intents for office number/ location
             String firstName = intent.getStringExtra(FIRSTNAME_KEY);
             String lastName = intent.getStringExtra(LASTNAME_KEY);
             String email = intent.getStringExtra(EMAIL_KEY);
             String department = intent.getStringExtra(DEPARTMENT_KEY);
+
+
             boolean isAvailable = intent.getBooleanExtra(AVAILABLE_KEY, false);
             professor = new Professor(firstName, lastName, email, "dummy", department);
             Log.d(TAG, professor.toString());
             //ImageView img = (ImageView) findViewById(R.id.availableImage);
             //img.setImageResource(professor.isAvailable() ? IMAGES[0] : IMAGES[1]);
-            TextView nameText = findViewById(R.id.nameText);
-            TextView departmentText = findViewById(R.id.departmentText);
-            TextView emailText = findViewById(R.id.emailText);
+            TextView nameText = findViewById(R.id.ProfessorNameTextView);
+            TextView departmentText = findViewById(R.id.OfficeLocationTextView);
+            TextView emailText = findViewById(R.id.EmailTextView);
             nameText.setText(professor.getFirstName() + " " + professor.getLastName());
             departmentText.setText(professor.getDepartment());
             emailText.setText(professor.getEmail());
+
         }
+
+        /*
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,8 +77,10 @@ public class ProfessorActivity extends AppCompatActivity {
                 startActivity(Intent.createChooser(emailIntent, "Choose how you'd like to send"));
             }
         });
+        */
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
+
 
 
     @Override
