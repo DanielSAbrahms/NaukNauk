@@ -1,39 +1,151 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+tools:context="com.example.irish.nauknaukfinalproject.MainActivity">
+<!--
+<android.support.design.widget.AppBarLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.example.irish.nauknaukfinalproject.ProfessorActivity">
+    android:layout_height="wrap_content"
+    android:theme="@style/AppTheme.AppBarOverlay">
 
-    <android.support.design.widget.AppBarLayout
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:popupTheme="@style/AppTheme.PopupOverlay" />
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+</android.support.design.widget.AppBarLayout>
 
-    </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_professor" />
+<include layout="@layout/content_professor" />
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+<android.support.design.widget.FloatingActionButton
+    android:id="@+id/fab"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom|end"
+    android:layout_margin="@dimen/fab_margin"
+    app:srcCompat="@android:drawable/ic_dialog_email" />
 
-    <GridLayout
+    -->
+
+<TextView
+    android:id="@+id/ProfessorNameTextView"
+    android:layout_row="0"
+    android:layout_column="0"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:text="Professor Name"
+    android:gravity="center"
+    android:textSize="40sp"
+    android:textColor="@color/textColorWhite"
+    android:background="@color/professor1"
+    android:layout_rowWeight="1"
+    android:layout_columnSpan="2"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintRight_toRightOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/OfficeLocationTextView"
+        android:layout_row="1"
+        android:layout_column="0"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="0dp"
+        android:text="Office Location"
+        android:gravity="center"
+        android:textSize="40sp"
+        android:textColor="@color/textColorWhite"
+        android:background="@color/professor2"
+        android:layout_rowWeight="1"
+        android:layout_columnSpan="2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    </GridLayout>
 
-</android.support.design.widget.CoordinatorLayout>
+    <TextView
+        android:id="@+id/PhoneNumberTextView"
+        android:layout_row="2"
+        android:layout_column="0"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="Phone Number"
+        android:gravity="center"
+        android:textSize="40sp"
+        android:textColor="@color/textColorWhite"
+        android:background="@color/professor3"
+        android:layout_rowWeight="1"
+        android:layout_columnWeight="5"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/PhoneNumberImageButton"
+        android:layout_row="2"
+        android:layout_column="1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:textSize="40sp"
+        android:textColor="@color/textColorWhite"
+        android:background="@color/professor3"
+        android:src="@android:drawable/ic_menu_call"
+        android:layout_rowWeight="1"
+        android:layout_columnWeight="1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/EmailTextView"
+        android:layout_row="3"
+        android:layout_column="0"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="Email"
+        android:gravity="center"
+        android:textSize="40sp"
+        android:textColor="@color/textColorWhite"
+        android:background="@color/professor4"
+        android:layout_rowWeight="1"
+        android:layout_columnWeight="5"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/EmailImageButton"
+        android:layout_row="3"
+        android:layout_column="1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:textSize="40sp"
+        android:textColor="@color/textColorWhite"
+        android:background="@color/professor4"
+        android:src="@android:drawable/ic_dialog_email"
+        android:layout_rowWeight="1"
+        android:layout_columnWeight="1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+
+
+
+
+</GridLayout>
