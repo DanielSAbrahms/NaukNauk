@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.NavUtils;
@@ -31,6 +32,8 @@ public class ProfessorActivity extends AppCompatActivity {
     public static String LASTNAME_KEY = "lastName";
     public static String DEPARTMENT_KEY = "department";
     public static String AVAILABLE_KEY = "isAvailable";
+    public static String PHONE_NUMBER_KEY = "phoneNumber";
+    public static String OFFICE_LOCATION_KEY = "officeLocation";
     private Professor professor;
 
     @Override
@@ -46,30 +49,35 @@ public class ProfessorActivity extends AppCompatActivity {
 
         if(intent != null){
 
-            // TODO: Add receiving intents for office number/ location
+            // TODO: Add receiving intents for office number/ location - done
             String firstName = intent.getStringExtra(FIRSTNAME_KEY);
             String lastName = intent.getStringExtra(LASTNAME_KEY);
             String email = intent.getStringExtra(EMAIL_KEY);
             String department = intent.getStringExtra(DEPARTMENT_KEY);
-
-
+            String officeLocation = intent.getStringExtra(OFFICE_LOCATION_KEY);
+            String phoneNumber = intent.getStringExtra(PHONE_NUMBER_KEY);
             boolean isAvailable = intent.getBooleanExtra(AVAILABLE_KEY, false);
-            professor = new Professor(firstName, lastName, email, "dummy", department);
+
+            professor = new Professor(firstName, lastName, email, "dummy", department, officeLocation, phoneNumber);
             Log.d(TAG, professor.toString());
             //ImageView img = (ImageView) findViewById(R.id.availableImage);
             //img.setImageResource(professor.isAvailable() ? IMAGES[0] : IMAGES[1]);
             TextView nameText = findViewById(R.id.ProfessorNameTextView);
-            TextView departmentText = findViewById(R.id.OfficeLocationTextView);
+            TextView departmentText = findViewById(R.id.DepartmentTextView);
             TextView emailText = findViewById(R.id.EmailTextView);
+            TextView officeLocationText = findViewById(R.id.OfficeLocationTextView);
+            TextView phoneNumberText = findViewById(R.id.PhoneNumberTextView);
+
             nameText.setText(professor.getFirstName() + " " + professor.getLastName());
             departmentText.setText(professor.getDepartment());
             emailText.setText(professor.getEmail());
-
+            officeLocationText.setText((professor.getOfficeLocation()!=null) ? professor.getOfficeLocation() : "Office Location N/A");
+            phoneNumberText.setText((professor.getPhoneNumber()!=null) ? professor.getPhoneNumber() : "Phone Number N/A");
         }
 
-        /*
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+
+        ImageView emailButton = (ImageView) findViewById(R.id.EmailImageButton);
+        emailButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Uri uri = Uri.parse("mailto: " + professor.getEmail()).buildUpon().build();
@@ -77,7 +85,19 @@ public class ProfessorActivity extends AppCompatActivity {
                 startActivity(Intent.createChooser(emailIntent, "Choose how you'd like to send"));
             }
         });
-        */
+
+        ImageView phoneButton = (ImageView) findViewById(R.id.PhoneNumberImageButton);
+        phoneButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                intent.setData(Uri.parse("tel:" + professor.getPhoneNumber()));
+                if(intent.resolveActivity(getPackageManager()) != null){
+                    startActivity(intent);
+                }
+            }
+        });
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 

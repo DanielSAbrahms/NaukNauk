@@ -31,6 +31,8 @@ public class FirestoreHelper {
     public static String DEPARTMENT_KEY = "department";
     public static String AVAILABLE_KEY = "isAvailable";
     public static String FAVORITES_KEY = "favorites";
+    public static String PHONE_NUMBER_KEY = "phoneNumber";
+    public static String OFFICE_LOCATION_KEY = "officeLocation";
     // Keys for accessing directories, again SQL-style
     public static String ROOT_KEY = "NaukNauk";
     public static String USERS_KEY = "NaukNauk/Users";
@@ -72,6 +74,8 @@ public class FirestoreHelper {
             Professor tmpProf = (Professor) gu;
             user.put(DEPARTMENT_KEY, tmpProf.getDepartment());
             user.put(AVAILABLE_KEY, tmpProf.isAvailable());
+            user.put(OFFICE_LOCATION_KEY, tmpProf.getOfficeLocation());
+            user.put(PHONE_NUMBER_KEY, tmpProf.getPhoneNumber());
             DocumentReference newProfessorDocument = professorCollectionRef.document(gu.getEmail());
             newProfessorDocument.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override

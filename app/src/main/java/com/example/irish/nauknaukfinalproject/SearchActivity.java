@@ -40,13 +40,17 @@ public class SearchActivity extends AppCompatActivity {
     public static String ROOT_KEY = "NaukNauk";
     public static String USERS_KEY = "NaukNauk/Users";
     public static String STUDENTS_KEY = "NaukNauk/Users/Students";
+    public static String PROFESSORS_KEY = "NaukNauk/Users/Professors";
+
     public static String EMAIL_KEY = "email";
     public static String PASSWORD_KEY = "password";
     public static String FIRSTNAME_KEY = "firstName";
     public static String LASTNAME_KEY = "lastName";
     public static String DEPARTMENT_KEY = "department";
     public static String AVAILABLE_KEY = "isAvailable";
-    public static String PROFESSORS_KEY = "NaukNauk/Users/Professors";
+    public static String PHONE_NUMBER_KEY = "phoneNumber";
+    public static String OFFICE_LOCATION_KEY = "officeLocation";
+
     private final CharSequence[] DEPARTMENTS = {"All Departments", "Accounting", "Business Administration", "Biology", "Economics", "Finance",
             "Marketing", "Chemistry", "Communication", "Computer Science", "Criminal Justice", "Education", "Engineering", "English",
             "History", "Human Physiology", "Journalism", "Mathematics", "Music", "Nursing", "Philosophy", "Physics", "Political Science",
@@ -144,6 +148,8 @@ public class SearchActivity extends AppCompatActivity {
                         intent.putExtra(DEPARTMENT_KEY, professor.getDepartment());
                         intent.putExtra(EMAIL_KEY, professor.getEmail());
                         intent.putExtra(AVAILABLE_KEY, professor.isAvailable());
+                        intent.putExtra(OFFICE_LOCATION_KEY, professor.getOfficeLocation());
+                        intent.putExtra(PHONE_NUMBER_KEY, professor.getPhoneNumber());
                         startActivityForResult(intent, 0);
                     }
                 });

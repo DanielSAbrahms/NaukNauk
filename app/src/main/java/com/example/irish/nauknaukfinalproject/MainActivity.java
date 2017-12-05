@@ -46,6 +46,8 @@ public class MainActivity extends AppCompatActivity {
     public static String LASTNAME_KEY = "lastName";
     public static String DEPARTMENT_KEY = "department";
     public static String AVAILABLE_KEY = "isAvailable";
+    public static String PHONE_NUMBER_KEY = "phoneNumber";
+    public static String OFFICE_LOCATION_KEY = "officeLocation";
     public static String FAVORITES_KEY = "favorites";
     // Keys for collection access
     public static String ROOT_KEY = "NaukNauk";
@@ -99,8 +101,10 @@ public class MainActivity extends AppCompatActivity {
         this.studentCollectionRef = db.collection(STUDENTS_KEY);
         Log.d(TAG, new Professor("Jason", "Conci", "conci@gonzaga.edu", "password", "Computer Science").toString());
         FirestoreHelper helper = new FirestoreHelper();
-        /*
-        helper.addUser(new Professor("Gina", "Sprint", "sprint@gonzaga.edu", "password", "Computer Science"), true);
+
+        helper.addUser(new Professor("Gina", "Sprint", "sprint@gonzaga.edu", "password",
+                "Computer Science", "HERAK 309B", "(509) 313 3535"), true);
+
         helper.addUser(new Professor("Shawn", "Bowers", "bowers@gonzaga.edu", "password", "Computer Science"), true);
         helper.addUser(new Professor("Melody", "Alsaker", "alsaker@gonzaga.edu", "password", "Mathematics"), true);
         helper.addUser(new Professor("Scott", "Starbuck", "starbuck@gonzaga.edu", "password", "Religious Studies"), true);
@@ -109,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
         helper.addUser(new Professor("Rick", "Stoody", "stoody@gonzaga.edu", "password", "Philosophy"), true);
         helper.addUser(new Professor("Brent", "Diebel", "diebel@gonzaga.edu", "password", "Philosophy"), true);
         helper.addUser(new Professor("Bonni", "Dichone", "dichone@gonzaga.edu", "password", "Mathematics"), true);
-        */
+
     }
 
     @Override
