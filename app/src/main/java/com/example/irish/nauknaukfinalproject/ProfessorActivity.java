@@ -1,27 +1,27 @@
 package com.example.irish.nauknaukfinalproject;
 
 import android.content.Intent;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.ContactsContract;
-import android.support.design.widget.FloatingActionButton;
+import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.NavUtils;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EdgeEffect;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.List;
 
 public class ProfessorActivity extends AppCompatActivity {
     private final String TAG = "PROFESSOR_ACTIVITY";
@@ -34,7 +34,19 @@ public class ProfessorActivity extends AppCompatActivity {
     public static String AVAILABLE_KEY = "isAvailable";
     public static String PHONE_NUMBER_KEY = "phoneNumber";
     public static String OFFICE_LOCATION_KEY = "officeLocation";
+
+    public static String ROOT_KEY = "NaukNauk";
+    public static String USERS_KEY = "NaukNauk/Users";
+    public static String STUDENTS_KEY = "NaukNauk/Users/Students";
+    public static String PROFESSORS_KEY = "NaukNauk/Users/Professors";
+
+    private String currentUser = "jconci@zagmail.gonzaga.edu";
     private Professor professor;
+
+    private FirebaseFirestore db = null;
+    private CollectionReference rootReference = null;
+    private CollectionReference studentCollectionRef = null;
+    private CollectionReference professorCollectionRef = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +56,11 @@ public class ProfessorActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         */
+
+        this.db = FirebaseFirestore.getInstance();
+        this.rootReference = db.collection(ROOT_KEY);
+        this.professorCollectionRef=db.collection(PROFESSORS_KEY);
+        this.studentCollectionRef = db.collection(STUDENTS_KEY);
 
         Intent intent = getIntent();
 
@@ -105,8 +122,24 @@ public class ProfessorActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater balloon = getMenuInflater();
-        balloon.inflate(R.menu.professor_menu, menu);
+        final Menu menuFinal = menu;
+        studentCollectionRef.document(currentUser).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.isSuccessful()){
+                    Student student = task.getResult().toObject(Student.class);
+                    List<DocumentReference> favoritesList = student.getFavorites();
+                    if(!favoritesList.contains(professorCollectionRef.document(professor.getEmail()))){
+                        MenuInflater balloon = getMenuInflater();
+                        balloon.inflate(R.menu.professor_menu_add, menuFinal);
+                    } else {
+                        MenuInflater balloon = getMenuInflater();
+                        balloon.inflate(R.menu.professor_menu_delete, menuFinal);
+                    }
+                }
+            }
+        });
+
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -118,9 +151,71 @@ public class ProfessorActivity extends AppCompatActivity {
                 setResult(RESULT_OK, intent);
                 ProfessorActivity.this.finish();
                 return true;
+            case R.id.addProfessorToFavorites:
+                addProfessorToFavorites();
+                return true;
+            case R.id.deleteProfessorFromFavorites:
+                deleteProfessorFromFavorites();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
+    private void addProfessorToFavorites(){
+        studentCollectionRef.document(currentUser).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.isSuccessful()){
+                    Student student = task.getResult().toObject(Student.class);
+                    Log.d(TAG, student.toString());
+                    List<DocumentReference> favoritesList = student.getFavorites();
+                    if (!favoritesList.contains(professorCollectionRef.document(professor.getEmail()))) {
+                        favoritesList.add(professorCollectionRef.document(professor.getEmail()));
+                        student.setFavorites(favoritesList);
+                        studentCollectionRef.document(currentUser).set(student).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                Log.d(TAG, "It's working here");
+                                Snackbar.make(findViewById(R.id.professorLayout), "Favorites Addition Successful!", Snackbar.LENGTH_SHORT).show();
+                            }
+                        });
+                    } else {
+                        Snackbar.make(findViewById(R.id.professorLayout), "Professor Already in Favorites", Snackbar.LENGTH_SHORT).show();
+                    }
+                }else{
+                    Log.d(TAG, "Error Adding Professor");
+                }
+            }
+        });
+    }
+
+
+    public void deleteProfessorFromFavorites(){
+        studentCollectionRef.document(currentUser).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.isSuccessful()){
+                    Student student = task.getResult().toObject(Student.class);
+                    Log.d(TAG, student.toString());
+                    List<DocumentReference> favoritesList = student.getFavorites();
+                    if (favoritesList.contains(professorCollectionRef.document(professor.getEmail()))) {
+                        favoritesList.remove(professorCollectionRef.document(professor.getEmail()));
+                        student.setFavorites(favoritesList);
+                        studentCollectionRef.document(currentUser).set(student).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                Log.d(TAG, "It's working here");
+                                Snackbar.make(findViewById(R.id.professorLayout), "Favorites Deletion Successful!", Snackbar.LENGTH_SHORT).show();
+                            }
+                        });
+                    } else {
+                        Snackbar.make(findViewById(R.id.professorLayout), "Professor Not In Favorites", Snackbar.LENGTH_SHORT).show();
+                    }
+                }else{
+                    Log.d(TAG, "Error Adding Professor");
+                }
+            }
+        });
+    }
 }

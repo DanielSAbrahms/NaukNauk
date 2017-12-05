@@ -61,6 +61,7 @@ public class SearchActivity extends AppCompatActivity {
     private FirebaseFirestore db = null;
     private CollectionReference rootReference = null;
     private CollectionReference professorCollectionRef = null;
+    private String currentUser = "jconci@zagmail.gonzaga.edu";
     private ListView professorListView;
     private TextView departmentTextView;
     private ArrayList<Professor> professorList;

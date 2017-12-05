@@ -5,6 +5,9 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -37,7 +40,12 @@ public class FavoritesActivity extends AppCompatActivity {
     public static String LASTNAME_KEY = "lastName";
     public static String DEPARTMENT_KEY = "department";
     public static String AVAILABLE_KEY = "isAvailable";
+    public static String PHONE_NUMBER_KEY = "phoneNumber";
+    public static String OFFICE_LOCATION_KEY = "officeLocation";
     private String currentUser = "jconci@zagmail.gonzaga.edu";
+
+
+
     private FirebaseFirestore db = null;
     private CollectionReference rootReference = null;
     private CollectionReference professorCollectionRef = null;
@@ -79,6 +87,8 @@ public class FavoritesActivity extends AppCompatActivity {
                         intent.putExtra(DEPARTMENT_KEY, professor.getDepartment());
                         intent.putExtra(EMAIL_KEY, professor.getEmail());
                         intent.putExtra(AVAILABLE_KEY, professor.isAvailable());
+                        intent.putExtra(PHONE_NUMBER_KEY, professor.getPhoneNumber());
+                        intent.putExtra(OFFICE_LOCATION_KEY, professor.getOfficeLocation());
                         startActivityForResult(intent, 0);
                     }
                 });
@@ -86,6 +96,25 @@ public class FavoritesActivity extends AppCompatActivity {
         });
     }
 
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater balloon = getMenuInflater();
+        balloon.inflate(R.menu.refresh_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int itemID = item.getItemId();
+        switch (itemID){
+            case R.id.refreshButton:
+                getProfessorsGivenStudent(currentUser);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
     /**
      * Returns arrayList of professors within a student's list of favorite professors,
