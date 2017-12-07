@@ -69,6 +69,19 @@ public class FavoritesActivity extends AppCompatActivity {
         Log.d(TAG, professorList.toString());
         favoritesListView.invalidate();
         professorAdapter.notifyDataSetChanged();
+
+        /**
+         * In this block of code, we listen to when the user clicks on an item within our ListView of Professors.
+         * Once an item is clicked, we gather which item was clicked, and prepare to launch ProfessorActivity.
+         * We do so by gathering the professor clicked, gathering all fields of the Professor, passing these fields
+         * into our ProfessorActivity intent, and then starting the activity.
+         *
+         * In the future, I would like to implement a way of gathering the professors rather than relying
+         * on the system of:
+         *      PROFESSOR_REF = professor.lastName + "@gonzaga.edu"
+         * Since I know this format is not always how a professor's email is formatted; however, I could not
+         * find a way to accomplish this within the time contraints.
+         */
         favoritesListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -104,6 +117,14 @@ public class FavoritesActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
+    /**
+     * In this method, we handle the user selections within our Menu.
+     * Clicking the 'refreshButton' manually refreshes the professors to the screen, as this can,
+     * at times, not update immediately.
+     *
+     * @param item -> the optionsItem selected
+     * @return -> a boolean as to whether or not the event was handled
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int itemID = item.getItemId();
@@ -119,9 +140,11 @@ public class FavoritesActivity extends AppCompatActivity {
     /**
      * Returns arrayList of professors within a student's list of favorite professors,
      * given a valid student path.
-     * TODO: This acts seriously goofy, get this to update quietly rather than needing to be forced
-     * TODO: Figure out if there's a way to do this without a triple listener
-     * @param emailTmp
+     *
+     * In addition, this method pushes all found professors to an our ProfessorList, creates a new
+     * professorAdapter with these objects, and redraws the ListView.
+     *
+     * @param emailTmp -> the student email whose favorites we wish to access and display
      * @return
      */
     public ArrayList<Professor> getProfessorsGivenStudent(String emailTmp){
