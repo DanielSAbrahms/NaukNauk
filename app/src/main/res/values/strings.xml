@@ -6,4 +6,6 @@
     <string name="search_by_department_text_view_string">Search by Department</string>
     <string name="search_by_name_text_view_hint">Enter Name</string>
     <string name="title_activity_professor">ProfessorActivity</string>
+    <string name="available_false">This Professor is not in their office</string>
+    <string name="available_true">This Professor is in their office</string>
 </resources>

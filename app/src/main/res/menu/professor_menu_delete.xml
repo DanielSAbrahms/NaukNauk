@@ -4,7 +4,7 @@
     <item
         android:id="@+id/deleteProfessorFromFavorites"
         android:title = "Delete Professor From Favorites"
-        android:icon="@android:drawable/ic_menu_delete"
-        app:showAsAction="always"
+        android:icon="@drawable/star_on"
+    app:showAsAction="always"
         />
 </menu>

@@ -15,4 +15,6 @@
     <color name="professor3">#01569b</color>
     <color name="professor4">#01569b</color>
     <color name="professor5">#01569b</color>
+    <color name="available_false">#FF0000</color>
+    <color name="available_true">#00FF00</color>
 </resources>

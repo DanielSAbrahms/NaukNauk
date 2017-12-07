@@ -1,6 +1,7 @@
 package com.example.irish.nauknaukfinalproject;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -42,6 +43,7 @@ public class ProfessorActivity extends AppCompatActivity {
 
     private String currentUser = "jconci@zagmail.gonzaga.edu";
     private Professor professor;
+    boolean isAvailable;
 
     private FirebaseFirestore db = null;
     private CollectionReference rootReference = null;
@@ -74,7 +76,7 @@ public class ProfessorActivity extends AppCompatActivity {
             String department = intent.getStringExtra(DEPARTMENT_KEY);
             String officeLocation = intent.getStringExtra(OFFICE_LOCATION_KEY);
             String phoneNumber = intent.getStringExtra(PHONE_NUMBER_KEY);
-            boolean isAvailable = intent.getBooleanExtra(AVAILABLE_KEY, false);
+            isAvailable = intent.getBooleanExtra(AVAILABLE_KEY, false);
 
             // Creating a new Professor object with these names. password field is 'dummy' since
             // we haven't yet implemented User Authentication. In the future this will not be the case.
@@ -122,12 +124,26 @@ public class ProfessorActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Intent.ACTION_DIAL);
-                intent.setData(Uri.parse("tel:" + professor.getPhoneNumber()));
+                if (professor.getPhoneNumber().substring(0,9).equals("(509) 313")) {
+                    intent.setData(Uri.parse("tel:" + professor.getPhoneNumber()));
+                } else {
+                    intent.setData(Uri.parse("tel:509313" + professor.getPhoneNumber()));
+                }
                 if(intent.resolveActivity(getPackageManager()) != null){
                     startActivity(intent);
                 }
             }
         });
+
+        TextView availableBar = (TextView) findViewById(R.id.ProfessorAvailableTextView);
+        if(isAvailable) {
+            availableBar.setText(R.string.available_true);
+            availableBar.setBackgroundResource(R.color.available_true);
+        }
+        else {
+            availableBar.setText(R.string.available_false);
+            availableBar.setBackgroundResource(R.color.available_false);
+        }
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
