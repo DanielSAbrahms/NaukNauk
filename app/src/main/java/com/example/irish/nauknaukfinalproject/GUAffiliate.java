@@ -20,6 +20,7 @@ public class GUAffiliate implements Serializable{
     public String email;
     public String password;
 
+    // EVC, takes all fields as String parameters
     public GUAffiliate(String firstName, String lastName, String email, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -27,9 +28,12 @@ public class GUAffiliate implements Serializable{
         this.password = password;
     }
 
+    // DVC, sets all fields equal to String "NULL"
     public GUAffiliate() {
         this.firstName = this.lastName = this.email = this.password = "NULL";
     }
+
+    // BLOCK OF GETTERS AND SETTERS
 
     public String getFirstName() {
         return firstName;

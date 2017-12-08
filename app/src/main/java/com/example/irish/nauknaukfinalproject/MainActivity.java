@@ -59,14 +59,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         TextView test = findViewById(R.id.SearchTextView);
+
+        // Upon SearchTextView click, we launch SearchActivity
         test.setOnClickListener(new View.OnClickListener() {
-            //comment to push
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, SearchActivity.class);
                 startActivity(intent);
             }
         });
+        // Upon FavoritesTextView click, we launch FavoritesActivity
         TextView favorites = (TextView) findViewById(R.id.FavoritesTextView);
         favorites.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,7 +83,6 @@ public class MainActivity extends AppCompatActivity {
         /*
         helper.addUser(new Professor("Gina", "Sprint", "sprint@gonzaga.edu", "password",
                 "Computer Science", "HERAK 309B", "(509) 313 3535"), true);
-
         helper.addUser(new Professor("Shawn", "Bowers", "bowers@gonzaga.edu", "password", "Computer Science"), true);
         helper.addUser(new Professor("Melody", "Alsaker", "alsaker@gonzaga.edu", "password", "Mathematics"), true);
         helper.addUser(new Professor("Scott", "Starbuck", "starbuck@gonzaga.edu", "password", "Religious Studies"), true);
@@ -93,6 +94,10 @@ public class MainActivity extends AppCompatActivity {
         */
     }
 
+    /**
+     * Method overridden to ensure that our app doesn't look terrible when orientation changes.
+     * @param newConfig -> the new orientation/configuration of the device.
+     */
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);

@@ -19,7 +19,17 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.ArrayList;
 
 /**
- * Created by Jason on 11/30/2017.
+ * FirestoreArrayAdapter class, subclass of ArrayAdapter<Professor>. In this class, we are given an
+ * ArrayList of professor objects, from which we populate the ListView to which this adapter is set.
+ * This is done by getting each professor Object, and determining their firstName, lastName, and
+ * isAvailable fields. Using activity_list_item, a green or red circle is displayed in the item,
+ * based on their availability, as well as the Professor's full name.
+ *
+ * Sources:
+ *      None
+ *
+ * Version: 1.0
+ * Author: Jason Conci
  */
 
 public class FirestoreArrayAdapter extends ArrayAdapter<Professor>{

@@ -25,13 +25,14 @@ public class Professor extends GUAffiliate implements Serializable{
 
 
     // Default value constructor, uses GUAffiliate DVC
-
-
     public Professor() {
         super();
         this.isAvailable = true;
         this.department = this.phoneNumber = this.officeLocation = this.officeHours = null;
     }
+
+    // BLOCK OF VARIOUS EVC's //
+
     public Professor(String firstName, String lastName, String email, String password, String department, boolean isAvailable) {
         super(firstName, lastName, email, password);
         this.department = department;
@@ -46,7 +47,6 @@ public class Professor extends GUAffiliate implements Serializable{
         this.isAvailable = false;
         this.officeHours = null;
     }
-
 
     public Professor(String firstName, String lastName, String email, String password, String department, String officeLocation, String officeHours, String phoneNumber) {
 
@@ -75,6 +75,9 @@ public class Professor extends GUAffiliate implements Serializable{
 
         this.phoneNumber = phoneNumber;
     }
+
+    // BLOCK OF GETTERS AND SETTERS FOR FIELDS //
+
 
     public boolean isAvailable() {
         return isAvailable;

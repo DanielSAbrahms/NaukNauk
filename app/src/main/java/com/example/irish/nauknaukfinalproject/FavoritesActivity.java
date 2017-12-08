@@ -62,7 +62,7 @@ public class FavoritesActivity extends AppCompatActivity {
     private String currentUser = "jconci@zagmail.gonzaga.edu";
 
 
-
+    // Fields for Firebase Collection References, as well as GUI components
     private FirebaseFirestore db = null;
     private CollectionReference rootReference = null;
     private CollectionReference professorCollectionRef = null;

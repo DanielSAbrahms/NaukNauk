@@ -25,13 +25,14 @@ public class Student extends GUAffiliate {
     // Note: for using FireStore's place-into-object call, we need a DVC, and from this Firestore
     // can use getters and setters to sort of construct our Object
     private List<DocumentReference> favorites;
+
+    // DVC, uses superclass GUAffiliate DVC
     public Student() {
         super();
     }
 
-    /**
-     * TODO: add an initialization call for Students' favorite list
-     */
+    // EVC for student. Takes all GUAffiliate fields as String parameters, as well as
+    // initializes our favorites list to an empty List
     public Student(String firstName, String lastName, String email, String password) {
         super(firstName, lastName, email, password);
         this.favorites = new List<DocumentReference>() {
@@ -157,6 +158,7 @@ public class Student extends GUAffiliate {
         };
     }
 
+    // BLOCK OF GETTERS AND SETTERS //
     public List<DocumentReference> getFavorites() {
         return favorites;
     }
