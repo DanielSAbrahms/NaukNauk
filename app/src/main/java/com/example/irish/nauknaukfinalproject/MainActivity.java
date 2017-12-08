@@ -63,9 +63,13 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        FirestoreHelper helper = new FirestoreHelper();
+        String officeHoursDummy = "M 1:00-2:00\nT: N/A\nW: 1:00-2:00\nR: 11:00-12:00\nF: 1:00-2:00";
+
         /*
         helper.addUser(new Professor("Gina", "Sprint", "sprint@gonzaga.edu", "password",
-                "Computer Science", "HERAK 309B", "(509) 313 3535"), true);
+                "Computer Science", "HERAK 309B", officeHoursDummy, "(509) 313 3535", true), true);
 
         helper.addUser(new Professor("Shawn", "Bowers", "bowers@gonzaga.edu", "password", "Computer Science"), true);
         helper.addUser(new Professor("Melody", "Alsaker", "alsaker@gonzaga.edu", "password", "Mathematics"), true);
@@ -75,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
         helper.addUser(new Professor("Rick", "Stoody", "stoody@gonzaga.edu", "password", "Philosophy"), true);
         helper.addUser(new Professor("Brent", "Diebel", "diebel@gonzaga.edu", "password", "Philosophy"), true);
         helper.addUser(new Professor("Bonni", "Dichone", "dichone@gonzaga.edu", "password", "Mathematics"), true);
-*/
+        */
     }
 
     @Override

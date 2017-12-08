@@ -74,7 +74,7 @@ public class FirestoreArrayAdapter extends ArrayAdapter<Professor>{
 
         TextView txt = (TextView) convertView.findViewById(android.R.id.text1);
         txt.setText(professor.firstName + " " + professor.lastName);
-        txt.setTextSize(30);
+        txt.setTextSize(35);
 
         ImageView img = (ImageView) convertView.findViewById(android.R.id.icon);
         img.setImageResource(professor.isAvailable ? IMAGES[0] : IMAGES[1]);

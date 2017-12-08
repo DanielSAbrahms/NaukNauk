@@ -2,6 +2,7 @@ package com.example.irish.nauknaukfinalproject;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -42,6 +43,8 @@ public class FavoritesActivity extends AppCompatActivity {
     public static String AVAILABLE_KEY = "isAvailable";
     public static String PHONE_NUMBER_KEY = "phoneNumber";
     public static String OFFICE_LOCATION_KEY = "officeLocation";
+    public static String OFFICE_HOURS_KEY = "officeHours";
+
     private String currentUser = "jconci@zagmail.gonzaga.edu";
 
 
@@ -102,6 +105,7 @@ public class FavoritesActivity extends AppCompatActivity {
                         intent.putExtra(AVAILABLE_KEY, professor.isAvailable());
                         intent.putExtra(PHONE_NUMBER_KEY, professor.getPhoneNumber());
                         intent.putExtra(OFFICE_LOCATION_KEY, professor.getOfficeLocation());
+                        intent.putExtra(OFFICE_HOURS_KEY, professor.getOfficeHours());
                         startActivityForResult(intent, 0);
                     }
                 });
@@ -131,6 +135,7 @@ public class FavoritesActivity extends AppCompatActivity {
         switch (itemID){
             case R.id.refreshButton:
                 getProfessorsGivenStudent(currentUser);
+                Snackbar.make(findViewById(R.id.activityFavorites), "Refreshed!", Snackbar.LENGTH_SHORT).show();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -159,36 +164,37 @@ public class FavoritesActivity extends AppCompatActivity {
                 if(e==null) {
                     professorList.clear();
                     studentCollectionRef.document(email).get()
-                            .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                                @Override
-                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                    Log.d(TAG, "Got the student in question");
+                        .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                Log.d(TAG, "Got the student in question");
+                                professorList.clear();
+                                if (task.isSuccessful()) {
                                     professorList.clear();
-                                    if (task.isSuccessful()) {
-                                        professorList.clear();
-                                        Student student = task.getResult().toObject(Student.class);
-                                        List<DocumentReference> docsList = student.getFavorites();
-                                        professorList.clear();
-                                        for (DocumentReference doc : docsList) {
-                                            doc.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                                                @Override
-                                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                                    Log.d(TAG, "Getting the professors now");
-                                                    Log.d(TAG, professorList.toString());
-                                                    professorList.add(task.getResult().toObject(Professor.class));
-                                                    professorAdapter = new FirestoreArrayAdapter(FavoritesActivity.this, professorList);
-                                                    favoritesListView.setAdapter(professorAdapter);
-                                                    favoritesListView.invalidate();
-                                                    professorAdapter.notifyDataSetChanged();
-                                                }
-                                            });
-                                        }
-                                    } else {
-                                        Log.d(TAG, "Something went wrong in the ProfessorListGivenStudent");
+                                    Student student = task.getResult().toObject(Student.class);
+                                    List<DocumentReference> docsList = student.getFavorites();
+                                    professorList.clear();
+                                    for (DocumentReference doc : docsList) {
+                                        doc.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                                Log.d(TAG, "Getting the professors now");
+                                                Log.d(TAG, professorList.toString());
+                                                professorList.add(task.getResult().toObject(Professor.class));
+                                                professorAdapter = new FirestoreArrayAdapter(FavoritesActivity.this, professorList);
+                                                favoritesListView.setAdapter(professorAdapter);
+                                                favoritesListView.invalidate();
+                                                professorAdapter.notifyDataSetChanged();
+                                            }
+                                        });
                                     }
+                                } else {
+                                    Log.d(TAG, "Something went wrong in the ProfessorListGivenStudent");
                                 }
-                            });
-
+                            }
+                        });
+                }else{
+                    Log.d(TAG, "Something went wrong in listening to Professors");
                 }
             }
         });

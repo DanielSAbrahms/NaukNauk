@@ -9,6 +9,7 @@ import java.io.Serializable;
 public class Professor extends GUAffiliate implements Serializable{
     public String department;
     public String officeLocation;
+    public String officeHours;
     public String phoneNumber;
     public boolean isAvailable;
 
@@ -17,7 +18,7 @@ public class Professor extends GUAffiliate implements Serializable{
     public Professor() {
         super();
         this.isAvailable = true;
-        this.department = this.phoneNumber = this.officeLocation = null;
+        this.department = this.phoneNumber = this.officeLocation = this.officeHours = null;
     }
     public Professor(String firstName, String lastName, String email, String password, String department, boolean isAvailable) {
         super(firstName, lastName, email, password);
@@ -31,12 +32,42 @@ public class Professor extends GUAffiliate implements Serializable{
         this.officeLocation = null;
         this.phoneNumber = null;
         this.isAvailable = false;
+        this.officeHours = null;
+    }
+
+    public String getOfficeHours() {
+        return officeHours;
+    }
+
+    public void setOfficeHours(String officeHours) {
+        this.officeHours = officeHours;
+    }
+
+    public Professor(String firstName, String lastName, String email, String password, String department, String officeLocation, String officeHours, String phoneNumber) {
+
+        super(firstName, lastName, email, password);
+        this.department = department;
+        this.officeLocation = officeLocation;
+        this.officeHours = officeHours;
+        this.phoneNumber = phoneNumber;
+    }
+
+    public Professor(String firstName, String lastName, String email, String password, String department, String officeLocation, String officeHours, String phoneNumber, boolean isAvailable) {
+
+        super(firstName, lastName, email, password);
+        this.department = department;
+        this.officeLocation = officeLocation;
+        this.officeHours = officeHours;
+        this.phoneNumber = phoneNumber;
+        this.isAvailable = isAvailable;
     }
 
     public Professor(String firstName, String lastName, String email, String password, String department, String officeLocation, String phoneNumber) {
         super(firstName, lastName, email, password);
         this.department = department;
         this.officeLocation = officeLocation;
+        this.officeHours = null;
+
         this.phoneNumber = phoneNumber;
     }
 

@@ -35,6 +35,8 @@ public class ProfessorActivity extends AppCompatActivity {
     public static String AVAILABLE_KEY = "isAvailable";
     public static String PHONE_NUMBER_KEY = "phoneNumber";
     public static String OFFICE_LOCATION_KEY = "officeLocation";
+    public static String OFFICE_HOURS_KEY = "officeHours";
+
 
     public static String ROOT_KEY = "NaukNauk";
     public static String USERS_KEY = "NaukNauk/Users";
@@ -75,12 +77,13 @@ public class ProfessorActivity extends AppCompatActivity {
             String email = intent.getStringExtra(EMAIL_KEY);
             String department = intent.getStringExtra(DEPARTMENT_KEY);
             String officeLocation = intent.getStringExtra(OFFICE_LOCATION_KEY);
+            String officeHours = intent.getStringExtra(OFFICE_HOURS_KEY);
             String phoneNumber = intent.getStringExtra(PHONE_NUMBER_KEY);
             isAvailable = intent.getBooleanExtra(AVAILABLE_KEY, false);
 
             // Creating a new Professor object with these names. password field is 'dummy' since
             // we haven't yet implemented User Authentication. In the future this will not be the case.
-            professor = new Professor(firstName, lastName, email, "dummy", department, officeLocation, phoneNumber);
+            professor = new Professor(firstName, lastName, email, "dummy", department, officeLocation, officeHours, phoneNumber);
             Log.d(TAG, professor.toString());
 
             // TODO -> add TextView/Images for isAvailable and Office Hours
@@ -89,12 +92,14 @@ public class ProfessorActivity extends AppCompatActivity {
             TextView emailText = findViewById(R.id.EmailTextView);
             TextView officeLocationText = findViewById(R.id.OfficeLocationTextView);
             TextView phoneNumberText = findViewById(R.id.PhoneNumberTextView);
+            TextView officeHoursText = findViewById(R.id.OfficeHoursTextView);
 
             nameText.setText(professor.getFirstName() + " " + professor.getLastName());
             departmentText.setText(professor.getDepartment());
             emailText.setText(professor.getEmail());
             officeLocationText.setText((professor.getOfficeLocation()!=null) ? professor.getOfficeLocation() : "Office Location N/A");
             phoneNumberText.setText((professor.getPhoneNumber()!=null) ? professor.getPhoneNumber() : "Phone Number N/A");
+            officeHoursText.setText((professor.getOfficeHours()!=null) ? professor.getOfficeHours() : "Office Hours N/A");
         }
 
 
@@ -124,7 +129,10 @@ public class ProfessorActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Intent.ACTION_DIAL);
-                if (professor.getPhoneNumber().substring(0,9).equals("(509) 313")) {
+                if (professor.getPhoneNumber().equals("Phone Number N/A")) {
+                    Snackbar.make(findViewById(R.id.professorLayout), "", Snackbar.LENGTH_SHORT).show();
+                }
+                else if (professor.getPhoneNumber().substring(0,9).equals("(509) 313")) {
                     intent.setData(Uri.parse("tel:" + professor.getPhoneNumber()));
                 } else {
                     intent.setData(Uri.parse("tel:509313" + professor.getPhoneNumber()));
@@ -252,6 +260,7 @@ public class ProfessorActivity extends AppCompatActivity {
                             public void onComplete(@NonNull Task<Void> task) {
                                 Log.d(TAG, "It's working here");
                                 Snackbar.make(findViewById(R.id.professorLayout), "Favorites Addition Successful!", Snackbar.LENGTH_SHORT).show();
+                                invalidateOptionsMenu();
                             }
                         });
                     } else {
@@ -303,6 +312,7 @@ public class ProfessorActivity extends AppCompatActivity {
                             public void onComplete(@NonNull Task<Void> task) {
                                 Log.d(TAG, "It's working here");
                                 Snackbar.make(findViewById(R.id.professorLayout), "Favorites Deletion Successful!", Snackbar.LENGTH_SHORT).show();
+                                invalidateOptionsMenu();
                             }
                         });
                     } else {

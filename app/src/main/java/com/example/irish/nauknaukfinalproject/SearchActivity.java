@@ -50,6 +50,8 @@ public class SearchActivity extends AppCompatActivity {
     public static String AVAILABLE_KEY = "isAvailable";
     public static String PHONE_NUMBER_KEY = "phoneNumber";
     public static String OFFICE_LOCATION_KEY = "officeLocation";
+    public static String OFFICE_HOURS_KEY = "officeHours";
+
 
     private final CharSequence[] DEPARTMENTS = {"All Departments", "Accounting", "Business Administration", "Biology", "Economics", "Finance",
             "Marketing", "Chemistry", "Communication", "Computer Science", "Criminal Justice", "Education", "Engineering", "English",
@@ -150,6 +152,7 @@ public class SearchActivity extends AppCompatActivity {
                         intent.putExtra(EMAIL_KEY, professor.getEmail());
                         intent.putExtra(AVAILABLE_KEY, professor.isAvailable());
                         intent.putExtra(OFFICE_LOCATION_KEY, professor.getOfficeLocation());
+                        intent.putExtra(OFFICE_HOURS_KEY, professor.getOfficeHours());
                         intent.putExtra(PHONE_NUMBER_KEY, professor.getPhoneNumber());
                         startActivityForResult(intent, 0);
                     }
