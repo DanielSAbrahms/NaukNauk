@@ -29,6 +29,20 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Favorites Activity class. In this class, a user (currently jconci@zagmail.gonzaga.edu) is shown a
+ * ListView containing the Availability of their Favorite'd professors. If the user clicks on a
+ * Professor in the List, ProfessorActivity is launched. ListView is populated in real time with
+ * user's favorites.
+ *
+ * Sources:
+ *      Get Realtime Updates with Cloud Firestore, Google Firestore
+ *      https://firebase.google.com/docs/firestore/query-data/listen
+ *
+ * Version: 1.4
+ * Authors: Jason Conci, Daniel Abrahms
+ */
+
 public class FavoritesActivity extends AppCompatActivity {
     private final String TAG = "FAVORITES_ACTIVITY";
     public static String ROOT_KEY = "NaukNauk";

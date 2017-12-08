@@ -3,7 +3,16 @@ package com.example.irish.nauknaukfinalproject;
 import java.io.Serializable;
 
 /**
- * Created by Jason on 11/30/2017.
+ * Professor class. This class is a direct subclass of GuAffiliate, inheriting fields such as firstName,
+ * lastName, email, and password, as well as associated getters, setters and constructors. This class
+ * also implements professor-specific fields, such as department, officeLocation, officeHorus, phoneNumber,
+ * and boolean field isAvailable, representing whether or not the professor is currently available.
+ * Class implements various constructors, as well as getters and setters for all fields.
+ *
+ * Sources:
+ *      None
+ * Version: 1.6
+ * Authors: Jason Conci
  */
 
 public class Professor extends GUAffiliate implements Serializable{
@@ -13,6 +22,9 @@ public class Professor extends GUAffiliate implements Serializable{
     public String phoneNumber;
     public boolean isAvailable;
 
+
+
+    // Default value constructor, uses GUAffiliate DVC
 
 
     public Professor() {
@@ -35,13 +47,6 @@ public class Professor extends GUAffiliate implements Serializable{
         this.officeHours = null;
     }
 
-    public String getOfficeHours() {
-        return officeHours;
-    }
-
-    public void setOfficeHours(String officeHours) {
-        this.officeHours = officeHours;
-    }
 
     public Professor(String firstName, String lastName, String email, String password, String department, String officeLocation, String officeHours, String phoneNumber) {
 
@@ -102,6 +107,16 @@ public class Professor extends GUAffiliate implements Serializable{
     public void setDepartment(String department) {
         this.department = department;
     }
+
+
+    public String getOfficeHours() {
+        return officeHours;
+    }
+
+    public void setOfficeHours(String officeHours) {
+        this.officeHours = officeHours;
+    }
+
 
     @Override
     public String toString() {

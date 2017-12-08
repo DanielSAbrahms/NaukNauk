@@ -34,6 +34,18 @@ import java.util.List;
 
 import static android.content.res.Configuration.ORIENTATION_LANDSCAPE;
 
+/**
+ * MainActivity class. In this class, Users are prompted as to whether they would like to Search for
+ * a Professor, or whether they would like to access their Favorites. Selections are handled in Anonymous
+ * listeners, and Favorites/Search Activities are launched thustly.
+ *
+ * Sources:
+ *      Add Data to Cloud, Google Firestore
+ *      https://firebase.google.com/docs/firestore/manage-data/add-data
+ *
+ * Version: 1.2
+ * Authors: Jason Conci, Daniel Abrahms
+ */
 public class MainActivity extends AppCompatActivity {
     private String currentUser = "jconci@zagmail.gonzaga.edu";
     private final int REQUEST_CODE_FAVORITES = 1;
@@ -64,12 +76,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        FirestoreHelper helper = new FirestoreHelper();
-        String officeHoursDummy = "M 1:00-2:00\nT: N/A\nW: 1:00-2:00\nR: 11:00-12:00\nF: 1:00-2:00";
+        // Block of test code, for adding users to our database
 
         /*
         helper.addUser(new Professor("Gina", "Sprint", "sprint@gonzaga.edu", "password",
-                "Computer Science", "HERAK 309B", officeHoursDummy, "(509) 313 3535", true), true);
+                "Computer Science", "HERAK 309B", "(509) 313 3535"), true);
 
         helper.addUser(new Professor("Shawn", "Bowers", "bowers@gonzaga.edu", "password", "Computer Science"), true);
         helper.addUser(new Professor("Melody", "Alsaker", "alsaker@gonzaga.edu", "password", "Mathematics"), true);

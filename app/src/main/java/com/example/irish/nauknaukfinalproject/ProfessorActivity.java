@@ -24,6 +24,26 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.List;
 
+/**
+ * Professor Activity class. In this class, the user is presented a Professor's 'page', if you will.
+ * On this page is the professor's name, department, office location, office hours, phone number, and
+ * email address. Phone number and email address fields also have images next to the side, which, upon
+ * being clicked, will call or email the professor accordingly.
+ *
+ * Additionally, in the menu, the user has the a Star button to Favorite or un-Favorite the professor whose
+ * page they are currently looking at. Clicking this Star button will favorite or un-favorite the professor,
+ * depending on whether or not they are already in the user's favorites. This star image is either hollow,
+ * signifying the professor is not in the user's favorites, or filled, signifying the professor is in fact
+ * in their favorites.
+ *
+ * Sources:
+ *      Intents and Intent Filters, Android Developers
+ *      https://developer.android.com/guide/components/intents-filters.html
+ *
+ * Version: 1.2
+ * Authors: Jason Conci, Daniel Abrahms
+ */
+
 public class ProfessorActivity extends AppCompatActivity {
     private final String TAG = "PROFESSOR_ACTIVITY";
     private final int[] IMAGES = {R.drawable.greencheck, R.drawable.redx};

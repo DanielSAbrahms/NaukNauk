@@ -6,6 +6,16 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+/**
+ * Login Activity class. This Activity prompts the user for a username and password for their account.
+ * While this does nothing at the moment, in the future, this is where we will implement user authentication,
+ * as well as registration for new users to our application.
+ *
+ * Sources:
+ *
+ * Version: 1.0
+ * Authors: Jason Conci, Daniel Abrahms
+ */
 public class LoginActivity extends AppCompatActivity {
 
     @Override

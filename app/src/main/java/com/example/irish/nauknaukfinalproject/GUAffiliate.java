@@ -3,7 +3,15 @@ package com.example.irish.nauknaukfinalproject;
 import java.io.Serializable;
 
 /**
- * Created by Jason on 11/30/2017.
+ * GUAffiliate class. This class is the superclass for Student and Professor, being that both have in common
+ * a firstName, lastName, email, and password. All fields have appropriate getters and setters. Other
+ * implemented methods include DVC, EVC, and overridden toString() method.
+ *
+ * Sources:
+ *      None
+ *
+ * Version: 1.1
+ * Author: Jason Conci
  */
 
 public class GUAffiliate implements Serializable{
