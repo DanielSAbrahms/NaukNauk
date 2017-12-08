@@ -50,28 +50,34 @@ public class FirestoreArrayAdapter extends ArrayAdapter<Professor>{
     // Log tag
     public static String TAG = "FIRESTOREHELPER";
 
-    private FirebaseFirestore db = null;
-    private CollectionReference rootReference = null;
-    private CollectionReference professorCollectionRef = null;
-    private CollectionReference studentCollectionRef = null;
+    // Image resources used in creating of Views in getView() method
+    private final int[] IMAGES = {R.drawable.greenlight, R.drawable.redlight};
 
-    final int[] IMAGES = {R.drawable.greenlight, R.drawable.redlight};
-    private ArrayAdapter<Professor> professorAdapter;
-    private Context context;
-    private String sortMode;
-
+    /**
+     * FirestoreArrayAdapter constructor. Takes context, and an ArrayList of Professors as parameter.
+     * Uses ArrayAdapter() superclass constructor, passing in context, simple_list_item_1, and professorList
+     * as parameters.
+     *
+     * @param context -> the context in which our FirestoreArrayAdapter is being created
+     * @param professorList -> the list of Professors which we want to display
+     */
     public FirestoreArrayAdapter(Context context, ArrayList<Professor> professorList){
         super(context, android.R.layout.simple_list_item_1, professorList);
         this.notifyDataSetChanged();
-        this.db = FirebaseFirestore.getInstance();
-        rootReference = db.collection(ROOT_KEY);
-        professorCollectionRef = db.collection(PROFESSORS_KEY);
-        studentCollectionRef = db.collection(STUDENTS_KEY);
-        this.context = context;
         Log.d(TAG, "List: "+ professorList.toString());
     }
 
 
+    /**
+     * Within this method, we create the view for each item in our Professor ListView.
+     * We occupy the activity_list_item TextView, text1, with the Professor's first and last name.
+     * Then, we occupy the icon with a green or red image, according to the Professor's availability.
+     *
+     * @param position -> The activity_list_item's position within the ListView
+     * @param convertView -> the activity_list_item itself
+     * @param parent -> The ListView this activity_list_item will be placed into
+     * @return -> a formatted activity_list_item, which is placed into the ListView
+     */
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
@@ -94,6 +100,10 @@ public class FirestoreArrayAdapter extends ArrayAdapter<Professor>{
         return convertView;
     }
 
+    /**
+     * Returns number of items inside the current ListView
+     * @return -> number of items inside ListView
+     */
     @Override
     public int getCount() {
         return super.getCount();

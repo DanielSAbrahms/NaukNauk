@@ -23,7 +23,6 @@ public class Professor extends GUAffiliate implements Serializable{
     public boolean isAvailable;
 
 
-
     // Default value constructor, uses GUAffiliate DVC
     public Professor() {
         super();

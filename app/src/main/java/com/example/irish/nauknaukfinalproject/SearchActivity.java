@@ -72,14 +72,13 @@ public class SearchActivity extends AppCompatActivity {
     public static String OFFICE_LOCATION_KEY = "officeLocation";
     public static String OFFICE_HOURS_KEY = "officeHours";
 
-
+    // List of all searchable Departments (Not all departments have Professors yet, but easier to implement now )
     private final CharSequence[] DEPARTMENTS = {"All Departments", "Accounting", "Business Administration", "Biology", "Economics", "Finance",
             "Marketing", "Chemistry", "Communication", "Computer Science", "Criminal Justice", "Education", "Engineering", "English",
             "History", "Human Physiology", "Journalism", "Mathematics", "Music", "Nursing", "Philosophy", "Physics", "Political Science",
             "Psychology", "Public Relations", "Sociology", "Sport Management", "Sport and Physical Education", "Theatre Arts"};
 
-    // Firebase fields, as well as GUI Components which will be populated with
-    // Query results
+    // Firebase fields, as well as GUI Components which will be populated with query results
     private FirebaseFirestore db = null;
     private CollectionReference rootReference = null;
     private CollectionReference professorCollectionRef = null;
@@ -115,7 +114,6 @@ public class SearchActivity extends AppCompatActivity {
             public boolean onQueryTextSubmit(String s) {
                 return false;
             }
-
             @Override
             public boolean onQueryTextChange(String s) {
                 departmentTextView = findViewById(R.id.searchByDepartmentTextView);
@@ -133,7 +131,6 @@ public class SearchActivity extends AppCompatActivity {
                 searchy.setIconified(false);
             }
         });
-
 
 
         // Once the "Search by Department" TextView is clicked, the user is prompted via AlertDialog
@@ -202,8 +199,9 @@ public class SearchActivity extends AppCompatActivity {
      * @param name -> The string which we are querying for (professor's lastName begins with name)
      */
     public ArrayList<Professor> getProfessorsGivenName(String name){
-        // C-String manipulation; searching between field name and name with the last character shifted.
-        // EX: name 'Jason' -> search between 'Jason' and 'Jasop'
+        /** C-String manipulation; searching between field name and name with the last character shifted.
+         *      -> EX: name 'Jason' -> search between 'Jason' and 'Jasop'
+         */
         final ArrayList<Professor> professorList = new ArrayList<>();
         char[] nameArray = name.toCharArray();
         if(name.compareTo("")==0) return professorList;
@@ -216,6 +214,7 @@ public class SearchActivity extends AppCompatActivity {
         name = name.substring(0,1).toUpperCase() + name.substring(1).toLowerCase();
         upperLimitString = upperLimitString.substring(0,1).toUpperCase() + upperLimitString.substring(1);
 
+        // Block for actually querying our professors
         Log.d(TAG, name + " TO " + upperLimitString);
         professorCollectionRef.whereGreaterThanOrEqualTo(LASTNAME_KEY, name)
                 .whereLessThan(LASTNAME_KEY, upperLimitString)
@@ -257,6 +256,7 @@ public class SearchActivity extends AppCompatActivity {
             getProfessorsAll();
             return null;
         }
+        // Gathering all professors whose department is equal to the current department query
         professorCollectionRef.whereEqualTo(DEPARTMENT_KEY, department).addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(QuerySnapshot documentSnapshots, FirebaseFirestoreException e) {
@@ -270,6 +270,7 @@ public class SearchActivity extends AppCompatActivity {
                         // Casting DocumentSnapshot to Professor object and adding it
                         professorList.add(dc.toObject(Professor.class));
                     }
+                    // Updating our UI components
                     professorAdapter = new FirestoreArrayAdapter(SearchActivity.this, professorList);
                     professorListView.setAdapter(professorAdapter);
                     professorListView.invalidate();
@@ -298,6 +299,7 @@ public class SearchActivity extends AppCompatActivity {
                     Log.d(TAG, "Error loading professors. Check department String");
                     return;
                 } else {
+                    // Clear the current professorList
                     professorList.clear();
                     Log.d(TAG, "Currently updating professors list...");
                     for(DocumentSnapshot dc: documentSnapshots){
@@ -305,6 +307,7 @@ public class SearchActivity extends AppCompatActivity {
                         if(dc.toObject(Professor.class).getFirstName().compareTo("Jason")!=0)
                             professorList.add(dc.toObject(Professor.class));
                     }
+                    // Updating our UI components
                     professorAdapter = new FirestoreArrayAdapter(SearchActivity.this, professorList);
                     professorListView.setAdapter(professorAdapter);
                     professorListView.invalidate();

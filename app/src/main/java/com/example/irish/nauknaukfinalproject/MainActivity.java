@@ -78,7 +78,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // Block of test code, for adding users to our database
+        // Block of test code, for adding users to our database (Useful for uncommenting and checking
+        // our connection to the database, as this overwrites all professors within the database
 
         /*
         helper.addUser(new Professor("Gina", "Sprint", "sprint@gonzaga.edu", "password",
