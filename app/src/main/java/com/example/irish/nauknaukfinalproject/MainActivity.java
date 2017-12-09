@@ -34,6 +34,18 @@ import java.util.List;
 
 import static android.content.res.Configuration.ORIENTATION_LANDSCAPE;
 
+/**
+ * MainActivity class. In this class, Users are prompted as to whether they would like to Search for
+ * a Professor, or whether they would like to access their Favorites. Selections are handled in Anonymous
+ * listeners, and Favorites/Search Activities are launched thustly.
+ *
+ * Sources:
+ *      Add Data to Cloud, Google Firestore
+ *      https://firebase.google.com/docs/firestore/manage-data/add-data
+ *
+ * Version: 1.2
+ * Authors: Jason Conci, Daniel Abrahms
+ */
 public class MainActivity extends AppCompatActivity {
     private String currentUser = "jconci@zagmail.gonzaga.edu";
     private final int REQUEST_CODE_FAVORITES = 1;
@@ -47,14 +59,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         TextView test = findViewById(R.id.SearchTextView);
+
+        // Upon SearchTextView click, we launch SearchActivity
         test.setOnClickListener(new View.OnClickListener() {
-            //comment to push
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, SearchActivity.class);
                 startActivity(intent);
             }
         });
+        // Upon FavoritesTextView click, we launch FavoritesActivity
         TextView favorites = (TextView) findViewById(R.id.FavoritesTextView);
         favorites.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,13 +78,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        FirestoreHelper helper = new FirestoreHelper();
-        String officeHoursDummy = "M 1:00-2:00\nT: N/A\nW: 1:00-2:00\nR: 11:00-12:00\nF: 1:00-2:00";
+        // Block of test code, for adding users to our database (Useful for uncommenting and checking
+        // our connection to the database, as this overwrites all professors within the database
 
         /*
         helper.addUser(new Professor("Gina", "Sprint", "sprint@gonzaga.edu", "password",
-                "Computer Science", "HERAK 309B", officeHoursDummy, "(509) 313 3535", true), true);
-
+                "Computer Science", "HERAK 309B", "(509) 313 3535"), true);
         helper.addUser(new Professor("Shawn", "Bowers", "bowers@gonzaga.edu", "password", "Computer Science"), true);
         helper.addUser(new Professor("Melody", "Alsaker", "alsaker@gonzaga.edu", "password", "Mathematics"), true);
         helper.addUser(new Professor("Scott", "Starbuck", "starbuck@gonzaga.edu", "password", "Religious Studies"), true);
@@ -82,6 +95,10 @@ public class MainActivity extends AppCompatActivity {
         */
     }
 
+    /**
+     * Method overridden to ensure that our app doesn't look terrible when orientation changes.
+     * @param newConfig -> the new orientation/configuration of the device.
+     */
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);

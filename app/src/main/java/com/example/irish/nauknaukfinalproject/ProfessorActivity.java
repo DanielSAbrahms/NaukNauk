@@ -24,9 +24,28 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.List;
 
+/**
+ * Professor Activity class. In this class, the user is presented a Professor's 'page', if you will.
+ * On this page is the professor's name, department, office location, office hours, phone number, and
+ * email address. Phone number and email address fields also have images next to the side, which, upon
+ * being clicked, will call or email the professor accordingly.
+ *
+ * Additionally, in the menu, the user has the a Star button to Favorite or un-Favorite the professor whose
+ * page they are currently looking at. Clicking this Star button will favorite or un-favorite the professor,
+ * depending on whether or not they are already in the user's favorites. This star image is either hollow,
+ * signifying the professor is not in the user's favorites, or filled, signifying the professor is in fact
+ * in their favorites.
+ *
+ * Sources:
+ *      Intents and Intent Filters, Android Developers
+ *      https://developer.android.com/guide/components/intents-filters.html
+ *
+ * Version: 1.2
+ * Authors: Jason Conci, Daniel Abrahms
+ */
+
 public class ProfessorActivity extends AppCompatActivity {
     private final String TAG = "PROFESSOR_ACTIVITY";
-    private final int[] IMAGES = {R.drawable.greencheck, R.drawable.redx};
     public static String EMAIL_KEY = "email";
     public static String PASSWORD_KEY = "password";
     public static String FIRSTNAME_KEY = "firstName";
@@ -36,17 +55,16 @@ public class ProfessorActivity extends AppCompatActivity {
     public static String PHONE_NUMBER_KEY = "phoneNumber";
     public static String OFFICE_LOCATION_KEY = "officeLocation";
     public static String OFFICE_HOURS_KEY = "officeHours";
-
-
     public static String ROOT_KEY = "NaukNauk";
     public static String USERS_KEY = "NaukNauk/Users";
     public static String STUDENTS_KEY = "NaukNauk/Users/Students";
     public static String PROFESSORS_KEY = "NaukNauk/Users/Professors";
 
+    // Fields, from which we display Professor information and launch implicit intents
     private String currentUser = "jconci@zagmail.gonzaga.edu";
     private Professor professor;
     boolean isAvailable;
-
+    // Firestore Collection References, used in Favorites addition/deletion
     private FirebaseFirestore db = null;
     private CollectionReference rootReference = null;
     private CollectionReference studentCollectionRef = null;
@@ -56,10 +74,6 @@ public class ProfessorActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_professor);
-        /*
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        */
 
         // Gathering references to our FireStore root, Professor, and Student Collections.
         this.db = FirebaseFirestore.getInstance();
@@ -86,7 +100,7 @@ public class ProfessorActivity extends AppCompatActivity {
             professor = new Professor(firstName, lastName, email, "dummy", department, officeLocation, officeHours, phoneNumber);
             Log.d(TAG, professor.toString());
 
-            // TODO -> add TextView/Images for isAvailable and Office Hours
+            // Gathering our widgets, with which we will display Professor information to the user
             TextView nameText = findViewById(R.id.ProfessorNameTextView);
             TextView departmentText = findViewById(R.id.DepartmentTextView);
             TextView emailText = findViewById(R.id.EmailTextView);
@@ -108,7 +122,6 @@ public class ProfessorActivity extends AppCompatActivity {
          * at the email address listed on the Professor's page, which we know is valid, since it is
          * their login ID.
          *
-         * TODO: add options for additional emails
          */
         ImageView emailButton = (ImageView) findViewById(R.id.EmailImageButton);
         emailButton.setOnClickListener(new View.OnClickListener() {
@@ -177,17 +190,19 @@ public class ProfessorActivity extends AppCompatActivity {
                 if(task.isSuccessful()){
                     Student student = task.getResult().toObject(Student.class);
                     List<DocumentReference> favoritesList = student.getFavorites();
+                    // If the current professor is not in the current user's Favorites list
                     if(!favoritesList.contains(professorCollectionRef.document(professor.getEmail()))){
                         MenuInflater balloon = getMenuInflater();
                         balloon.inflate(R.menu.professor_menu_add, menuFinal);
-                    } else {
+                    }
+                    // Else, the current professor is in the current user's Favorites list
+                    else {
                         MenuInflater balloon = getMenuInflater();
                         balloon.inflate(R.menu.professor_menu_delete, menuFinal);
                     }
                 }
             }
         });
-
         return super.onCreateOptionsMenu(menu);
     }
 

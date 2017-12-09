@@ -10,20 +10,29 @@ import java.util.List;
 import java.util.ListIterator;
 
 /**
- * Created by Jason on 11/30/2017.
+ * Student class. This class is a direct subclass of GuAffiliate, inheriting fields such as firstName,
+ * lastName, email, and password, as well as associated getters, setters and constructors. This class
+ * also implements a student specific field, List<DocumentReference> favorites, which refers to the
+ * student's list of Favorite professors; this field is used heavily in Favorites and Professor Activites.
+ * Class implements various constructors, as well as getters and setters for all fields.
+ *
+ * Sources:
+ *      None
+ * Version: 1.2
+ * Authors: Jason Conci
  */
-
 public class Student extends GUAffiliate {
     // Note: for using FireStore's place-into-object call, we need a DVC, and from this Firestore
     // can use getters and setters to sort of construct our Object
     private List<DocumentReference> favorites;
+
+    // DVC, uses superclass GUAffiliate DVC
     public Student() {
         super();
     }
 
-    /**
-     * TODO: add an initialization call for Students' favorite list
-     */
+    // EVC for student. Takes all GUAffiliate fields as String parameters, as well as
+    // initializes our favorites list to an empty List
     public Student(String firstName, String lastName, String email, String password) {
         super(firstName, lastName, email, password);
         this.favorites = new List<DocumentReference>() {
@@ -149,6 +158,7 @@ public class Student extends GUAffiliate {
         };
     }
 
+    // BLOCK OF GETTERS AND SETTERS //
     public List<DocumentReference> getFavorites() {
         return favorites;
     }
