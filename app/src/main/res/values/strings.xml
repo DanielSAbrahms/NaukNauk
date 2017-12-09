@@ -8,4 +8,13 @@
     <string name="title_activity_professor">ProfessorActivity</string>
     <string name="available_false">This Professor is not in their office</string>
     <string name="available_true">This Professor is in their office</string>
+    <string name="login_password">Password</string>
+    <string name="login_username">GU Username</string>
+    <string name="login_prompt">Login</string>
+    <string name="professor_name">Professor Name</string>
+    <string name="professor_department">Department</string>
+    <string name="professor_office_location">Office Location</string>
+    <string name="professor_office_hours">Office Hours</string>
+    <string name="professor_phone_number">Phone Number</string>
+    <string name="professor_email">Email</string>
 </resources>
